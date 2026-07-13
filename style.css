@@ -115,7 +115,7 @@ body{
 .titulo{
     position: fixed;
     left: 50%;
-    top: 82vh;          /* debajo del logo */
+    top: 82vh;        
     transform: translateX(-50%);
     z-index: 100;
 
@@ -131,3 +131,4 @@ body{
 body{
     overflow-x:hidden;
 }
+

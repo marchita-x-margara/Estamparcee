@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Personalizadas</title>
+
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="personalizada.css">
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/interactjs/dist/interact.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/html2canvas/dist/html2canvas.min.js"></script>
+
+</head>
+<body>
+
+<main class="editor">
+
+
+    <aside class="panel">
+
+        <h2>Personalizá tu remera</h2>
+
+        <div class="grupo">
+
+            <label>Talle</label>
+
+            <select id="talle">
+                <option>S</option>
+                <option>M</option>
+                <option>L</option>
+                <option>XL</option>
+                <option>XXL</option>
+            </select>
+
+        </div>
+
+        <div class="grupo">
+
+            <label>Color</label>
+
+            <select id="color">
+                <option value="blanca">Blanca</option>
+                <option value="negra">Negra</option>
+                <option value="gris">Gris</option>
+            </select>
+
+        </div>
+
+        <div class="grupo">
+
+            <label>Subir diseño</label>
+
+            <input
+                type="file"
+                id="upload"
+                accept=".png,.jpg,.jpeg">
+
+        </div>
+
+    </aside>
+
+
+
+
+    <section class="preview">
+
+        <div class="remera">
+
+            <img
+                id="shirt"
+                src="remera_negra.png"
+                alt="">
+
+            <!-- área imprimible -->
+
+            <div class="print-area">
+
+                <img
+                    id="design"
+                    alt="">
+
+            </div>
+
+        </div>
+
+    </section>
+    <aside class="envio">
+
+    <h2>¿Te gusta cómo quedó?</h2>
+
+    <p>
+        Mandanos tu diseño y nos contactamos para realizar tu remera.
+    </p>
+
+    <form id="formulario">
+
+        <label>Nombre</label>
+        <input type="text" id="nombre" required>
+
+        <label>Email</label>
+        <input type="email" id="email" required>
+
+        <button type="submit">
+            Enviar diseño
+        </button>
+
+    </form>
+
+</aside>
+
+</main>
+
+<script 
+src="personalizada.js"
+></script>
+
+</body>
+</html>
