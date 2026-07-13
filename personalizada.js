@@ -11,27 +11,44 @@ gsap.to("body",{
 });
 const upload = document.getElementById("upload");
 const design = document.getElementById("design");
+let archivoUsuario = null;
 
 upload.addEventListener("change", function () {
 
-    console.log("Se eligió un archivo");
+    archivoUsuario = this.files[0];
 
-    const archivo = this.files[0];
+    if (!archivoUsuario) return;
 
-    if (!archivo) return;
 
     const lector = new FileReader();
 
-    lector.onload = function (e) {
 
-        console.log("Imagen cargada");
+    lector.onload = function(e){
 
         design.src = e.target.result;
         design.style.display = "block";
 
     };
 
-    lector.readAsDataURL(archivo);
+
+    lector.readAsDataURL(archivoUsuario);
+
+
+    // PRUEBA CLOUDINARY
+    subirImagenCloudinary(archivoUsuario)
+    .then(res => {
+
+        console.log("Respuesta Cloudinary:");
+        console.log(res);
+
+    })
+    .catch(error => {
+
+        console.log("Error Cloudinary:");
+        console.log(error);
+
+    });
+
 
 });
 // MOVER Y AGRANDAR DISEÑO
@@ -105,7 +122,39 @@ design.addEventListener("wheel", function(e){
     `translate(${x}px, ${y}px) scale(${scale})`;
 
 });
+
+
+emailjs.init("8EQTI5chcoZ0eA38d");
+
+
 const formulario = document.getElementById("formulario");
+
+
+
+function subirImagenCloudinary(archivo){
+
+    const formData = new FormData();
+
+    formData.append("file", archivo);
+
+    formData.append(
+        "upload_preset",
+        "MargaraDemo"
+    );
+
+
+    return fetch(
+        "https://api.cloudinary.com/v1_1/et27eppk/image/upload",
+        {
+            method:"POST",
+            body:formData
+        }
+    )
+    .then(res => res.json());
+
+}
+
+
 
 
 formulario.addEventListener("submit", function(e){
@@ -116,12 +165,97 @@ formulario.addEventListener("submit", function(e){
     html2canvas(document.querySelector(".remera"))
     .then(canvas => {
 
-        const imagen = canvas.toDataURL("image/png");
 
-        console.log(imagen);
+        canvas.toBlob(function(blob){
 
-        // acá después se envía por mail
+
+            const remeraFinal = new File(
+                [blob],
+                "remera_final.png",
+                {
+                    type:"image/png"
+                }
+            );
+
+
+            Promise.all([
+
+                subirImagenCloudinary(archivoUsuario),
+
+                subirImagenCloudinary(remeraFinal)
+
+            ])
+
+            .then(resultado => {
+
+
+                const urlOriginal = resultado[0].secure_url;
+
+                const urlRemera = resultado[1].secure_url;
+
+
+
+                const datos = {
+
+                    nombre:
+                    document.getElementById("nombre").value,
+
+
+                    email:
+                    document.getElementById("email").value,
+
+
+                    talle:
+                    document.getElementById("talle").value,
+
+
+                    color:
+                    document.getElementById("color").value,
+
+
+                    original:
+                    urlOriginal,
+
+
+                    remera:
+                    urlRemera
+
+                };
+
+
+
+                emailjs.send(
+                    "service_9uxhhti",
+                    "template_jokv4mx",
+                    datos
+                )
+
+                .then(()=>{
+
+                    alert("¡Pedido enviado!");
+
+                })
+
+
+                .catch(error=>{
+
+                    console.log(error);
+
+                    alert("Error enviando mail");
+
+                });
+
+
+
+            });
+
+
+
+        }, "image/png");
+
+
 
     });
+
 
 });
