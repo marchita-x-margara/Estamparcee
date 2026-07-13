@@ -66,8 +66,28 @@
     cursor:move;
 
     display:none;
+    touch-action:none;
+    user-select:none;
+    cursor:grab;
 
 }
+.design-box{
+
+    position:absolute;
+
+    border:2px dashed transparent;
+
+    padding:5px;
+
+}
+
+
+.design-box.activo{
+
+    border-color:#111;
+
+}
+
 .envio{
     padding:20px;
 }

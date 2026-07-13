@@ -11,6 +11,7 @@ gsap.to("body",{
 });
 const upload = document.getElementById("upload");
 const design = document.getElementById("design");
+const designBox = document.querySelector(".design-box");
 let archivoUsuario = null;
 
 upload.addEventListener("change", function () {
@@ -52,25 +53,30 @@ upload.addEventListener("change", function () {
 
 });
 // MOVER Y AGRANDAR DISEÑO
-
 interact("#design")
 .draggable({
 
-    listeners:{
+    listeners: {
+
         move(event){
 
             let target = event.target;
 
-            let x = (parseFloat(target.getAttribute("data-x")) || 0) + event.dx;
-            let y = (parseFloat(target.getAttribute("data-y")) || 0) + event.dy;
+            let x = (parseFloat(target.dataset.x) || 0) + event.dx;
+            let y = (parseFloat(target.dataset.y) || 0) + event.dy;
+
+            let scale = parseFloat(target.dataset.scale) || 1;
+
 
             target.style.transform =
-            `translate(${x}px, ${y}px) scale(${target.getAttribute("data-scale") || 1})`;
+            `translate(${x}px, ${y}px) scale(${scale})`;
 
-            target.setAttribute("data-x",x);
-            target.setAttribute("data-y",y);
+
+            target.dataset.x = x;
+            target.dataset.y = y;
 
         }
+
     }
 
 })
@@ -78,45 +84,77 @@ interact("#design")
 
 .gesturable({
 
-    listeners:{
+    listeners: {
+
         move(event){
 
             let target = event.target;
 
-            let scale = parseFloat(target.getAttribute("data-scale")) || 1;
+            let scale =
+            parseFloat(target.dataset.scale) || 1;
+
 
             scale += event.ds;
 
-            target.style.transform =
-            `translate(${target.getAttribute("data-x") || 0}px,
-            ${target.getAttribute("data-y") || 0}px)
-            scale(${scale})`;
 
-            target.setAttribute("data-scale",scale);
+            scale = Math.min(
+                Math.max(scale,0.2),
+                3
+            );
+
+
+            let x = target.dataset.x || 0;
+            let y = target.dataset.y || 0;
+
+
+            target.style.transform =
+            `translate(${x}px, ${y}px) scale(${scale})`;
+
+
+            target.dataset.scale = scale;
 
         }
+
     }
 
 });
+
+
+
+// ZOOM CON RUEDA EN PC
+
 design.addEventListener("wheel", function(e){
 
     e.preventDefault();
 
-    let scale = parseFloat(this.dataset.scale) || 1;
+
+    let scale =
+    parseFloat(this.dataset.scale) || 1;
+
 
     if(e.deltaY < 0){
-        scale += 0.1; // agranda
-    } else {
-        scale -= 0.1; // achica
+
+        scale += 0.1;
+
+    }else{
+
+        scale -= 0.1;
+
     }
 
-    // límites para que no desaparezca ni sea gigante
-    scale = Math.min(Math.max(scale,0.2),3);
+
+    scale = Math.min(
+        Math.max(scale,0.2),
+        3
+    );
+
 
     this.dataset.scale = scale;
 
+
     let x = this.dataset.x || 0;
     let y = this.dataset.y || 0;
+
 
     this.style.transform =
     `translate(${x}px, ${y}px) scale(${scale})`;
@@ -124,8 +162,29 @@ design.addEventListener("wheel", function(e){
 });
 
 
-emailjs.init("8EQTI5chcoZ0eA38d");
 
+// MODO EDICIÓN
+
+design.addEventListener("click", function(e){
+
+    e.stopPropagation();
+
+    document.querySelector(".design-box")
+    .classList.add("activo");
+
+});
+
+
+document.addEventListener("click", function(){
+
+    document.querySelector(".design-box")
+    .classList.remove("activo");
+
+});
+
+
+
+emailjs.init("8EQTI5chcoZ0eA38d");
 
 const formulario = document.getElementById("formulario");
 
