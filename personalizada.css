@@ -43,21 +43,19 @@
 }
 
 .print-area{
-
     position:absolute;
 
-    left:140px;
-    top:120px;
+    left:190px;
+    top:190px;
 
-    width:220px;
-    height:260px;
+    width:320px;
+    height:350px;
 
     overflow:hidden;
 
     border:1px dashed #999;
 
     z-index:10;
-
 }
 .design{
 
@@ -98,7 +96,7 @@
 
 
 #shirtCanvas{
-    width:500px; 
+    width:700px; 
     height:auto;
     display:block;
 }
@@ -172,4 +170,19 @@
 
     padding:15px 0;
 
+}
+
+
+
+.imagen-derecha {
+    width: 300px;
+    display: flex;
+    justify-content: center;
+    transform: translateX(-150px);
+}
+
+
+.imagen-derecha img {
+    width: 190%;
+    height: auto;
 }

@@ -444,17 +444,6 @@ carrito.push(remera);
 },"image/png");
 
 
-
-      carrito.push(remera);
-
-guardarCarrito();
-
-actualizarCarrito();
-
-limpiarEditor();
-
-abrirCarrito();
-
     });
 
 

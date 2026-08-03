@@ -57,19 +57,24 @@
 
         <div class="grupo">
 
-            <label>Subir diseño</label>
+ <div class="grupo">
 
-            <input
-    type="file"
-    id="upload"
-    accept=".png,.jpg,.jpeg"
-    multiple>
+    <label>Subir diseño</label>
 
-        </div>
+    <input
+        type="file"
+        id="upload"
+        accept=".png,.jpg,.jpeg"
+        multiple>
 
-    </aside>
+</div>
 
+<div class="grupo">
+    <label>Precio</label>
+    <p>$<span id="precio">20000</span></p>
+</div>
 
+</aside>
 
 
    <section class="preview">
@@ -89,14 +94,6 @@
     </div>
 
 
-    <div class="precio">
-
-        <h2>
-            Precio: $<span id="precio">15000</span>
-        </h2>
-
-    </div>
-
 
     <button id="agregarCarrito">
         Agregar al carrito
@@ -104,7 +101,11 @@
 
 
 </section>
+<section class="imagen-derecha">
 
+    <img src="pj_pagina.png" alt="Imagen decorativa">
+
+</section>
 </main>
 
 
@@ -120,9 +121,28 @@
 
     <div id="listaCarrito"></div>
 
+
+    <h3>
+        Entrega:
+    </h3>
+
+    <select id="envio">
+
+        <option value="encuentro">
+            Encuentro coordinado
+        </option>
+
+        <option value="correo">
+            Correo Argentino
+        </option>
+
+    </select>
+
+
     <h3>
         Total: $<span id="totalCarrito">0</span>
     </h3>
+
 
     <button id="comprar">
         Finalizar compra
