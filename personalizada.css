@@ -28,11 +28,12 @@
 }
 
 .remera{
-
     position:relative;
-    width:500px;
-
+    display:flex;
+    justify-content:center;
+    align-items:center;
 }
+
 
 .remera img{
 
@@ -44,8 +45,10 @@
 .print-area{
 
     position:absolute;
+
     left:140px;
     top:120px;
+
     width:220px;
     height:260px;
 
@@ -53,8 +56,10 @@
 
     border:1px dashed #999;
 
+    z-index:10;
+
 }
-#design{
+.design{
 
     position:absolute;
 
@@ -63,12 +68,15 @@
     left:35px;
     top:40px;
 
-    cursor:move;
+    display:block;
 
-    display:none;
-    touch-action:none;
-    user-select:none;
+    z-index:30;
+
     cursor:grab;
+
+    touch-action:none;
+
+    user-select:none;
 
 }
 .design-box{
@@ -88,14 +96,80 @@
 
 }
 
-.envio{
-    padding:20px;
+
+#shirtCanvas{
+    width:500px; 
+    height:auto;
+    display:block;
+}
+#design-container{
+
+    position:absolute;
+
+    width:100%;
+    height:100%;
+
+    inset:0;
+
+    overflow:hidden;
+
+    z-index:20;
+
+}
+#abrirCarrito{
+
+    position:fixed;
+    right:30px;
+    bottom:30px;
+
+    padding:15px 20px;
+
+    cursor:pointer;
+
 }
 
 
-.envio input,
-.envio button{
-    width:100%;
-    margin-top:10px;
-    padding:10px;
+#carritoPanel{
+
+    position:fixed;
+
+    top:0;
+    right:-400px;
+
+    width:350px;
+    height:100vh;
+
+    background:white;
+
+    padding:30px;
+
+    box-shadow:-5px 0 20px rgba(0,0,0,.2);
+
+    transition:.4s;
+
+    z-index:100;
+
+}
+
+
+#carritoPanel.activo{
+
+    right:0;
+
+}
+
+
+#cerrarCarrito{
+
+    float:right;
+
+}
+
+
+.item-carrito{
+
+    border-bottom:1px solid #ccc;
+
+    padding:15px 0;
+
 }

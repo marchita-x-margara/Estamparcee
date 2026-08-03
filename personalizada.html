@@ -46,10 +46,12 @@
             <label>Color</label>
 
             <select id="color">
-                <option value="blanca">Blanca</option>
-                <option value="negra">Negra</option>
-                <option value="gris">Gris</option>
-            </select>
+    <option value="blanca">Blanca</option>
+    <option value="negra">Negra</option>
+    <option value="roja">Roja</option>
+    <option value="azul">Azul</option>
+    <option value="gris">Gris</option>
+</select>
 
         </div>
 
@@ -58,9 +60,10 @@
             <label>Subir diseño</label>
 
             <input
-                type="file"
-                id="upload"
-                accept=".png,.jpg,.jpeg">
+    type="file"
+    id="upload"
+    accept=".png,.jpg,.jpeg"
+    multiple>
 
         </div>
 
@@ -69,59 +72,67 @@
 
 
 
-    <section class="preview">
+   <section class="preview">
 
-        <div class="remera">
+    <div class="remera">
 
-            <img
-                id="shirt"
-                src="remera_negra.png"
-                alt="">
+        <canvas id="shirtCanvas"></canvas>
 
-            <!-- área imprimible -->
+        <div class="print-area">
 
-            <div class="print-area">
-
-               <div class="design-box">
-
-    <img
-    id="design"
-    alt="">
-
-</div>
+            <div class="design-box" id="design-container">
 
             </div>
 
         </div>
 
-    </section>
-    <aside class="envio">
+    </div>
 
-    <h2>¿Te gusta cómo quedó?</h2>
 
-    <p>
-        Mandanos tu diseño y nos contactamos para realizar tu remera.
-    </p>
+    <div class="precio">
 
-    <form id="formulario">
+        <h2>
+            Precio: $<span id="precio">15000</span>
+        </h2>
 
-        <label>Nombre</label>
-        <input type="text" id="nombre" required>
+    </div>
 
-        <label>Email</label>
-        <input type="email" id="email" required>
 
-        <button type="submit">
-            Enviar diseño
-        </button>
+    <button id="agregarCarrito">
+        Agregar al carrito
+    </button>
 
-    </form>
 
-</aside>
+</section>
 
 </main>
 
 
+<div id="carritoPanel">
 
+    <button id="cerrarCarrito">
+        ✕
+    </button>
+
+    <h2>
+        🛒 Carrito
+    </h2>
+
+    <div id="listaCarrito"></div>
+
+    <h3>
+        Total: $<span id="totalCarrito">0</span>
+    </h3>
+
+    <button id="comprar">
+        Finalizar compra
+    </button>
+
+</div>
+
+
+<button id="abrirCarrito">
+    🛒 <span id="contadorCarrito">0</span>
+</button>
 </body>
 </html>
