@@ -371,7 +371,7 @@ const botonCarrito = document.getElementById("agregarCarrito");
 
 
 function actualizarPrecio() {
-    precio.textContent = 20000;
+    precio.textContent = 2;
 }
 // ACTUALIZAR PRECIO
 
