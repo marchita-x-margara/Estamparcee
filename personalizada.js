@@ -563,17 +563,43 @@ document
 
 document
 .getElementById("comprar")
-.addEventListener("click",()=>{
+.addEventListener("click", async () => {
 
-
-    if(carrito.length === 0){
-
+    if (carrito.length === 0) {
         alert("El carrito está vacío");
         return;
-
     }
 
-    enviarCarrito();
+    const items = carrito.map(producto => ({
+        title: `Remera personalizada (${producto.color} - ${producto.talle})`,
+        quantity: 1,
+        unit_price: producto.precio,
+        currency_id: "ARS"
+    }));
+
+    try {
+
+        const respuesta = await fetch("/api/crear-preferencia", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                items
+            })
+        });
+
+        const data = await respuesta.json();
+
+        window.location.href = data.init_point;
+
+    } catch (error) {
+
+        console.error(error);
+
+        alert("No se pudo iniciar el pago.");
+
+    }
 
 });
 function enviarCarrito(){

@@ -1,0 +1,12 @@
+{
+  "name": "estamparce",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "mercadopago": "^3.2.1"
+  }
+}
+
