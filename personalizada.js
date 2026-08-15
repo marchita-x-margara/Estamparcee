@@ -371,7 +371,7 @@ const botonCarrito = document.getElementById("agregarCarrito");
 
 
 function actualizarPrecio() {
-    precio.textContent = 2;
+    precio.textContent = 1;
 }
 // ACTUALIZAR PRECIO
 
@@ -392,14 +392,16 @@ talle.addEventListener("change",()=>{
 
 // AGREGAR AL CARRITO
 
-botonCarrito.addEventListener("click",()=>{
+botonCarrito.addEventListener("click", () => {
 
+    if (archivosUsuario.length === 0) {
+        alert("Subí al menos un diseño antes de agregar al carrito");
+        return;
+    }
 
     html2canvas(document.querySelector(".remera"))
-
-    .then(canvas=>{
-
-
+    .then(canvas => {
+        // ... el resto queda igual
      canvas.toBlob(blob=>{
 
     const archivoPreview = new File(
